@@ -22,7 +22,8 @@ function renderYearsChart(data) {
   var data = [{
     labels: years,
     values: years_counts,
-    marker: { colors: item_colors },
+    marker: { colors: item_colors,
+      line: {color: "white", width:1}},
     type: "pie",
     text: years,
     textinfo: 'label',

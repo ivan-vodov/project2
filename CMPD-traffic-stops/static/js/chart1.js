@@ -44,8 +44,9 @@ function renderChart1() {
         }
         layout = {
             barmode: 'stack',
+            font:chart_label_style,
             margin: {
-                l: 0,
+                l: 50,
                 r: 0,
                 b: 50,
                 t: 0
