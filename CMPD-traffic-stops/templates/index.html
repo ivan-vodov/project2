@@ -25,20 +25,20 @@
     <div class="row">
 
       <div class="col-md-4">
-        <h4>Reasons</h4>
+        <h5 style=color:grey>Reasons</h5>
         <div id="reasons_chart"></div>
       </div>
       <div class="col-md-3">
-        <h4>Results</h4>
+        <h5 style=color:grey>Results</h5>
         <div id="results_chart"></div>
       </div>
       <div class="col-md-2">
-        <h4>Years</h4>
+        <h5 style=color:grey>Years</h5>
         <div id="years_chart"></div>
       </div>
 
       <div class="col-md-3">
-        <h4>Count</h4>
+        <h5 style=color:grey>Count</h5>
         <div id="stats">
         </div>
 
@@ -64,8 +64,8 @@
                     <option value=Result_of_Stop>Result of Stop</option>
                     <option value=CMPD_Division>CMPD Division</option>
                     <option value=Month_of_Stop>Month of Stop</option>
-                    <option selected="selected">Year</option>
-                    <option value=Month>Month</option>
+                    <option>Year</option>
+                    <option value=Month_Num selected="selected">Month</option>
                   </select>
                   <select id="categ_param" class="custom-select" onchange="chart1_param_category=this.value;renderChart1()">
 
@@ -82,7 +82,7 @@
                       <option value=CMPD_Division>CMPD Division</option>
                       <option value=Month_of_Stop>Month of Stop</option>
                       <option selected="selected">Year</option>
-                      <option selected="selected">Month</option>
+                      <option>Month</option>
                     </select>
               </div>
 </div>

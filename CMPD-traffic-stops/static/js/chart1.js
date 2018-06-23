@@ -41,17 +41,13 @@ function renderChart1() {
 
             data.push(trace);
 
-
-            // console.log(curr_category);
-            // console.log(trace_labels);
-            // console.log(trace_counts);
         }
         layout = {
             barmode: 'stack',
             margin: {
                 l: 0,
                 r: 0,
-                b: 0,
+                b: 50,
                 t: 0
             }
         }
