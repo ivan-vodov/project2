@@ -1,0 +1,1 @@
+web: gunicorn CMPD-traffic-stops.app:app

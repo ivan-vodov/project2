@@ -1,7 +1,7 @@
 # import necessary libraries
 #import json
-import numpy as np
-import pandas as pd
+# import numpy as np
+# import pandas as pd
 from flask import Flask, render_template, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
