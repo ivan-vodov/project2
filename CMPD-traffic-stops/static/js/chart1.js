@@ -1,5 +1,6 @@
 function renderChart1() {
-    Plotly.d3.json("/data_chart1" + getCurrentFilterParams(), function (error, response) {
+    var chart1_p="&param="+chart1_param+"&param_category="+chart1_param_category;
+    Plotly.d3.json("/data_chart1" + getCurrentFilterParams()+chart1_p, function (error, response) {
         var $chartDiv = document.getElementById("chart1")
 
         var data_entries = unpack(response, 0)
@@ -33,6 +34,7 @@ function renderChart1() {
             trace = {
                 x: trace_labels,
                 y: trace_counts,
+                text: trace_labels,
                 name: curr_category,
                 type: 'bar',
             };

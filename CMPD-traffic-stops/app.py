@@ -103,47 +103,27 @@ def fetch_data():
     }), 201)
 
 
-@app.route("/data_timechart", methods=['GET'])
-def fetch_data_timechart():
-    division = request.args.get('division')
-    reason = request.args.get('reason')
-    result = request.args.get('result')
-    timechartp = request.args.get('timechartp')
-
-    print("===============Time data===============")
-    timechart_query_string = 'db.session.query(trafficStop.Month_of_Stop, trafficStop.Driver_Gender, func.count(trafficStop.Driver_Gender))'
-    if (division):
-        timechart_query_string += '.filter(trafficStop.CMPD_Division == "' + division + '")'
-    if (result):
-        timechart_query_string += '.filter(trafficStop.Result_of_Stop == "' + result + '")'
-    if (reason):
-        timechart_query_string += '.filter(trafficStop.Reason_for_Stop == "' + reason + '")'
-
-    timechart_query_string += '.group_by(trafficStop.Month_of_Stop, trafficStop.Driver_Gender).all()'
-    print(timechart_query_string)
-    timechart_query_result = eval(timechart_query_string)
-
-    return (jsonify(timechart_query_result), 201)
-
 
 @app.route("/data_chart1", methods=['GET'])
 def fetch_data_chart1():
     division = request.args.get('division')
     reason = request.args.get('reason')
     result = request.args.get('result')
+    year = request.args.get('year')
     param = request.args.get('param')
-    by = request.args.get('by')
+    param_category = request.args.get('param_category')
 
-    print("===============Time data===============")
-    query_string = 'db.session.query(trafficStop.Driver_Age, trafficStop.Year, func.count(trafficStop.Driver_Gender))'
+    query_string = 'db.session.query(trafficStop.'+param+', trafficStop.'+param_category+', func.count(trafficStop.Driver_Gender))'
     if (division):
         query_string += '.filter(trafficStop.CMPD_Division == "' + division + '")'
     if (result):
         query_string += '.filter(trafficStop.Result_of_Stop == "' + result + '")'
     if (reason):
         query_string += '.filter(trafficStop.Reason_for_Stop == "' + reason + '")'
+    if (year):
+        query_string += '.filter(trafficStop.Year == "' + year + '")'
 
-    query_string += '.group_by(trafficStop.Driver_Age, trafficStop.Year).all()'
+    query_string += '.group_by(trafficStop.'+param+', trafficStop.'+param_category+').all()'
     print(query_string)
     query_result = eval(query_string)
 

@@ -46,9 +46,46 @@
     </div>
     <div class="row">
       <div class="col-md-5 embed-responsive embed-responsive-16by9">
-        <iframe class=embed-responsive-item src=/charlotte-map id=mapper></iframe>
+        <iframe width=40% class=embed-responsive-item src=/charlotte-map id=mapper marginwidth="0"  marginheight="0"></iframe>
       </div>
       <div class="col-md-7">
+          <div class="form-inline">
+              <div class="form-group">
+                <select id="param" class="custom-select" onchange="chart1_param=this.value;renderChart1()">
+                    <option value=Reason_for_Stop>Reason for Stop</option>
+                    <option value=Officer_Race>Officer Race</option>
+                    <option value=Officer_Gender>Officer Gender</option>
+                    <option value=Officer_Years_of_Service>Officer Years of Service</option>
+                    <option value=Driver_Race>Driver Race</option>
+                    <option value=Driver_Ethnicity>Driver Ethnicity</option>
+                    <option value=Driver_Gender>Driver Gender</option>
+                    <option value=Driver_Age>Driver Age</option>
+                    <option value=Was_a_Search_Conducted>Was a Search Conducted</option>
+                    <option value=Result_of_Stop>Result of Stop</option>
+                    <option value=CMPD_Division>CMPD Division</option>
+                    <option value=Month_of_Stop>Month of Stop</option>
+                    <option selected="selected">Year</option>
+                    <option value=Month>Month</option>
+                  </select>
+                  <select id="categ_param" class="custom-select" onchange="chart1_param_category=this.value;renderChart1()">
+
+                      <option value=Reason_for_Stop>Reason for Stop</option>
+                      <option value=Officer_Race>Officer Race</option>
+                      <option value=Officer_Gender>Officer Gender</option>
+                      <option value=Officer_Years_of_Service>Officer Years of Service</option>
+                      <option value=Driver_Race>Driver Race</option>
+                      <option value=Driver_Ethnicity>Driver Ethnicity</option>
+                      <option value=Driver_Gender>Driver Gender</option>
+                      <option value=Driver_Age>Driver Age</option>
+                      <option value=Was_a_Search_Conducted>Was a Search Conducted</option>
+                      <option value=Result_of_Stop>Result of Stop</option>
+                      <option value=CMPD_Division>CMPD Division</option>
+                      <option value=Month_of_Stop>Month of Stop</option>
+                      <option selected="selected">Year</option>
+                      <option selected="selected">Month</option>
+                    </select>
+              </div>
+</div>
         <div id="chart1"></div>
       </div>
     </div>

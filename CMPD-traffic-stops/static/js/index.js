@@ -31,6 +31,8 @@ var result_filter = "";
 var year_filter="";
 var map_shades={};
 var map_counts={};
+var chart1_param="Year"
+var chart1_param_category="Month"
 
 // the function renders all charts, will be called on each choice made on control charts (Division, Reason and Result charts)
 function renderAllCharts() {

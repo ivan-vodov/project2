@@ -21,7 +21,7 @@ function renderResultsChart(data) {
     y: data_counts,
     x: data_entries,
     text: data_entries,
-    hoverinfo: 'none',
+    hoverinfo: 'value',
     marker: {
       color: item_colors,
       width: 0.4
@@ -49,7 +49,7 @@ function renderResultsChart(data) {
 
   var layout = {
     font: chart_label_style,
-    height: 200,
+    height: 150,
     margin: {
       l: 50,
       r: 50,
