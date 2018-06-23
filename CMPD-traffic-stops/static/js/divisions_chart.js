@@ -20,9 +20,11 @@ function renderDivisionsChart(data) {
   }
 
   // redraw the layers on the map
-  try{
+  try {
   document.getElementById('mapper').contentWindow.renderMap();
   }
-  catch{console.log('Ignoring the unloaded map exception:')}
+  catch (err) {
+    console.log('Ignoring the unloaded map exception:');
+  }
 
 }

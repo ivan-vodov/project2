@@ -38,7 +38,7 @@ function renderMap() {
     // delet layers which are not the map - presence or _url property is used to distinguish
     try {
       if (!layer._url) map.removeLayer(layer)
-    } catch { console.log("ignorinng unloaded layers exception") }
+    } catch (err) { console.log("ignorinng unloaded layers exception") }
   });
 
   L.geoJson(geo_json_data, {
@@ -91,7 +91,7 @@ function renderMap() {
         layer.bindPopup(features.properties.DNAME + ": " + dcount);
         layer.bindTooltip(dcount.toString(), { permanent: true, opacity: 0.5, direction: 'right' })
       }
-      catch{ console.log('ignoring missing key exception'); }
+      catch(err) { console.log('ignoring missing key exception'); }
 
       // }
 
