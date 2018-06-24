@@ -1,6 +1,9 @@
+//
+// the file contains the logic used for rendering the results chart 
+//
 
 function renderResultsChart(data) {
-  var $resultsDiv = document.getElementById("results_chart")
+  // generate arrays of values and counts from the JSON response segment passed to this function
   var data_entries = unpack(data, 0);
   var data_counts = unpack(data, 1);
 
@@ -20,11 +23,11 @@ function renderResultsChart(data) {
   var trace1 = {
     y: data_counts,
     x: data_entries,
-    text: data_entries,
-    hoverinfo: 'value',
+    text: data_counts,
+    textposition: 'auto',
+    hoverinfo: 'none',
     marker: {
-      color: item_colors,
-      width: 0.4
+      color: item_colors
     },
     type: 'bar'
   };
@@ -33,27 +36,14 @@ function renderResultsChart(data) {
 
   var data = [trace1];
 
-  // var layout = {
-  //   // autosize: false,
-  //   // width: 350,
-  //   height: 200,
-  //   titlefont: chart_title_style,
-  //   font: chart_label_style,
-  //   margin: {
-  //     l: 0,
-  //     r: 0,
-  //     b: 0,
-  //     t: 0
-  //   }
-  // };
 
   var layout = {
     font: chart_label_style,
-    height: 150,
+    height: 190,
     margin: {
-      l: 50,
-      r: 50,
-      b: 50,
+      l: 0,
+      r: 60,
+      b: 100,
       t: 0
     }
   }
@@ -62,7 +52,7 @@ function renderResultsChart(data) {
 
   var resultsPlot = document.getElementById('results_chart')
   resultsPlot.on('plotly_click', function (data) {
-    var item_clicked = data.points[0].text;
+    var item_clicked = data.points[0].x;
 
     //if the "active" bar clicked again, the filter gets reset, otherwise the filter is set to the bar clicked 
     if (item_clicked == result_filter) result_filter = ""

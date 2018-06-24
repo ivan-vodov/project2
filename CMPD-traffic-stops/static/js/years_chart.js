@@ -1,6 +1,9 @@
+//
+// the file contains the logic used for rendering the years chart 
+//
+
 function renderYearsChart(data) {
-
-
+  // generate arrays of values and counts from the JSON response segment passed to this function
   var years = unpack(data, 0);
   var years_counts = unpack(data, 1);
 
@@ -35,12 +38,11 @@ function renderYearsChart(data) {
 
   var layout = {
     showlegend: false,
-    // autosize: false,
-    // width: 350,
-    height: 250,
+    font: chart_label_style,
+    height: 90,
     margin: {
-      l: 50,
-      r: 50,
+      l: 30,
+      r: 30,
       b: 0,
       t: 0
     }

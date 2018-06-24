@@ -29,13 +29,14 @@ class trafficStop(db.Model):
 def main():
     return render_template("/index.html")
 
+
+# map iframe page route
 @app.route('/charlotte-map')
 def charlotte_map():
     return render_template('/charlotte-division-map.html')
 
-# API - data
 
-
+# API - data for control charts
 @app.route("/data", methods=['GET'])
 def fetch_data():
     # get API call parameters
@@ -43,13 +44,14 @@ def fetch_data():
     reason = request.args.get('reason')
     result = request.args.get('result')
     year = request.args.get('year')
-    # initialize query filter strings as empty strings
 
+    # initialize query filter strings as empty strings
     reason_filter_string = ""
     result_filter_string = ""
     year_filter_string = ""
     division_filter_string = ""
 
+    # create SQLAlchemy filter statement substrings
     if (reason):
         reason_filter_string = '.filter(trafficStop.Reason_for_Stop == "' + reason + '")'
     if (result):
@@ -59,39 +61,30 @@ def fetch_data():
     if (division):
         division_filter_string = '.filter(trafficStop.CMPD_Division == "' + division + '")'
 
-    print("===============Divisions Query===============")
+    # create SQLAlchemy statement strings and execute them using eval()
     division_query_string = 'db.session.query(trafficStop.CMPD_Division, func.count())'
     division_query_string += reason_filter_string + result_filter_string + year_filter_string
     division_query_string += '.group_by(trafficStop.CMPD_Division).all()'
-    print(division_query_string)
     division_query_results = eval(division_query_string)
 
-    print("===============Reasons Query===============")
     reason_query_string = 'db.session.query(trafficStop.Reason_for_Stop, func.count())'
     reason_query_string += division_filter_string + result_filter_string + year_filter_string
     reason_query_string += '.group_by(trafficStop.Reason_for_Stop).all()'
-    print(reason_query_string)
     reason_query_results = eval(reason_query_string)
 
-    print("===============Results Query===============")
     result_query_string = 'db.session.query(trafficStop.Result_of_Stop, func.count())'
     result_query_string += division_filter_string + reason_filter_string + year_filter_string
     result_query_string += '.group_by(trafficStop.Result_of_Stop).all()'
-    print(result_query_string)
     result_query_results = eval(result_query_string)
 
-    print("===============Years Query===============")
     year_query_string = 'db.session.query(trafficStop.Year, func.count())'
     year_query_string += division_filter_string + reason_filter_string + result_filter_string
     year_query_string += '.group_by(trafficStop.Year).all()'
-    print(year_query_string)
     year_query_results = eval(year_query_string)
 
-    print("===============Count Query===============")
     count_query_string = 'db.session.query(func.count(trafficStop.id))'
     count_query_string += division_filter_string + reason_filter_string + result_filter_string + year_filter_string
     count_query_string += '.scalar()'
-    print(count_query_string)
     count_query_results = eval(count_query_string)
 
     return (jsonify({
@@ -103,7 +96,7 @@ def fetch_data():
     }), 201)
 
 
-
+# API - data for the chart with user defined fields
 @app.route("/data_chart1", methods=['GET'])
 def fetch_data_chart1():
     division = request.args.get('division')
@@ -113,7 +106,8 @@ def fetch_data_chart1():
     param = request.args.get('param')
     param_category = request.args.get('param_category')
 
-    query_string = 'db.session.query(trafficStop.'+param+', trafficStop.'+param_category+', func.count(trafficStop.Driver_Gender))'
+    # create SQLAlchemy statement string and execute it using eval()
+    query_string = 'db.session.query(trafficStop.' + param + ', trafficStop.' + param_category + ', func.count(trafficStop.Driver_Gender))'
     if (division):
         query_string += '.filter(trafficStop.CMPD_Division == "' + division + '")'
     if (result):
@@ -123,10 +117,8 @@ def fetch_data_chart1():
     if (year):
         query_string += '.filter(trafficStop.Year == "' + year + '")'
 
-    query_string += '.group_by(trafficStop.'+param+', trafficStop.'+param_category+').all()'
-    print(query_string)
+    query_string += '.group_by(trafficStop.' + param + ', trafficStop.' + param_category + ').all()'
     query_result = eval(query_string)
-
     return (jsonify(query_result), 201)
 
 
